@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    hashed_password: {
+    password: {
         type: String,
         required: 'Password is required'
     },
@@ -29,14 +29,12 @@ const UserSchema = new mongoose.Schema({
 UserSchema.virtual('password')
     .set(function (password) {
         this._password = password;
-        //this.salt = this.makeSalt();
-        this.hashed_password = password;
-        //this.hashed_password = this.encryptPassword(password);
+        this.password = password;
     })
     .get(function () {
         return this._password;
     });
-UserSchema.path('hashed_password').validate(function (v) {
+UserSchema.path('password').validate(function (v) {
     if (this._password && this._password.length < 6) {
         this.invalidate('password', 'Password must be at least 6 characters.');
     }
