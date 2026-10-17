@@ -16,7 +16,7 @@ const create = async (req, res) => {
 };
 const list = async (req, res) => {
     try {
-        let projects = await Project.find().select("title description completion");
+        let projects = await Project.find().select("title firstname lastname email description completion");
         res.json(projects);
     } catch (err) {
         return res.status(400).json({
@@ -40,18 +40,13 @@ const projectByID = async (req, res, next, id) => {
     }
 };
 const read = (req, res) => {
-    req.profile.password = undefined;
-    req.profile.salt = undefined;
     return res.json(req.profile);
 };
 const update = async (req, res) => {
     try {
         let project = req.profile;
         project = extend(project, req.body);
-        project.updated = Date.now();
         await project.save();
-        project.password = undefined;
-        project.salt = undefined;
         res.json(project);
     } catch (err) {
         return res.status(400).json({
