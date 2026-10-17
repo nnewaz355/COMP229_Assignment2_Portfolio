@@ -1,4 +1,4 @@
-import Qualification from "../models/qualification.js";
+import Qualification from "../models/qualification.model.js";
 import extend from "lodash/extend.js";
 import errorHandler from "./error.controller.js";
 
