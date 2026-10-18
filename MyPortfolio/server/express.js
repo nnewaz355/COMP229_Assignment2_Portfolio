@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import compress from "compression";
 import cors from "cors";
 import helmet from "helmet";
+import authRoutes from './routes/auth.routes.js'
 import contactRoutes from './routes/contact.routes.js'
 import projectRoutes from './routes/project.routes.js'
 import qualificationRoutes from './routes/qualification.routes.js'
@@ -11,6 +12,7 @@ import userRoutes from './routes/user.routes.js';
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/', authRoutes)
 app.use('/', userRoutes)
 app.use('/', contactRoutes)
 app.use('/', projectRoutes)
