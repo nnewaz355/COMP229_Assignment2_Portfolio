@@ -31,7 +31,7 @@ const contactByID = async (req, res, next, id) => {
             return res.status(400).json({
                 error: "Contact not found",
             });
-        req.profile = contact;
+        req.contact = contact;
         next();
     } catch (err) {
         return res.status(400).json({
@@ -40,11 +40,11 @@ const contactByID = async (req, res, next, id) => {
     }
 };
 const read = (req, res) => {
-    return res.json(req.profile);
+    return res.json(req.contact);
 };
 const update = async (req, res) => {
     try {
-        let contact = req.profile;
+        let contact = req.contact;
         contact = extend(contact, req.body);
         await contact.save();
         res.json(contact);
@@ -56,7 +56,7 @@ const update = async (req, res) => {
 };
 const remove = async (req, res) => {
     try {
-        let contact = req.profile;
+        let contact = req.contact;
         let deletedContact = await contact.deleteOne();
         res.json(deletedContact);
     } catch (err) {
