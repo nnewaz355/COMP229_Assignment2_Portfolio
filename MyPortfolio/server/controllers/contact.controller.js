@@ -46,7 +46,6 @@ const update = async (req, res) => {
     try {
         let contact = req.profile;
         contact = extend(contact, req.body);
-        contact.updated = Date.now();
         await contact.save();
         res.json(contact);
     } catch (err) {
